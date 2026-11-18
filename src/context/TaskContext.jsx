@@ -25,7 +25,7 @@ const TaskContext = createContext(null);
 export function TaskProvider({ children }) {
   const [tasks, dispatch] = useReducer(taskReducer, undefined, initTasks);
 
-  // Track current local day so the week and "today" stay accurate across midnight and tab switches
+ 
   const [referenceDate, setReferenceDate] = useState(() => new Date());
   const todayKey = useMemo(
     () => formatLocalDateKey(referenceDate),
@@ -36,16 +36,16 @@ export function TaskProvider({ children }) {
     formatLocalDateKey(new Date())
   );
 
-  // Persist tasks to localStorage on every state update
+
   useEffect(() => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
     } catch {
-      // Ignore storage quota or private browsing errors gracefully
+      
     }
   }, [tasks]);
 
-  // Recompute week & today at local midnight and when the tab becomes visible again
+
   useEffect(() => {
     let midnightTimeoutId;
 
@@ -56,7 +56,7 @@ export function TaskProvider({ children }) {
       setReferenceDate((prevDate) => {
         const prevTodayKey = formatLocalDateKey(prevDate);
         if (prevTodayKey !== nextTodayKey) {
-          // If the user was viewing the previous "today", move selection forward to the new today
+        
           setSelectedDate((prevSelected) =>
             prevSelected === prevTodayKey ? nextTodayKey : prevSelected
           );
@@ -102,7 +102,7 @@ export function TaskProvider({ children }) {
     }
   }, [weekDays, selectedDate, todayKey]);
 
-  // Meaningful reduce: compute total & completed counts per day across the whole task list
+  
   const countsByDay = useMemo(() => {
     return tasks.reduce((acc, task) => {
       if (!acc[task.date]) {
@@ -116,7 +116,7 @@ export function TaskProvider({ children }) {
     }, {});
   }, [tasks]);
 
-  // Meaningful filter + sort: tasks for the selected day sorted chronologically (untimed tasks last)
+ 
   const tasksForSelectedDay = useMemo(() => {
     return tasks
       .filter((task) => task.date === selectedDate)
@@ -131,7 +131,7 @@ export function TaskProvider({ children }) {
       });
   }, [tasks, selectedDate]);
 
-  // Meaningful reduce: completed count for the selected day
+  
   const selectedDayStats = useMemo(() => {
     return tasksForSelectedDay.reduce(
       (acc, task) => {

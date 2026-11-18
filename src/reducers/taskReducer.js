@@ -10,9 +10,7 @@ export const TASK_ACTIONS = {
   MARK_NOTIFIED: 'MARK_NOTIFIED',
 };
 
-/**
- * Generates a unique task ID using crypto.randomUUID() with a safe fallback.
- */
+
 export function generateTaskId() {
   if (
     typeof crypto !== 'undefined' &&
@@ -25,9 +23,7 @@ export function generateTaskId() {
     .slice(2, 10)}`;
 }
 
-/**
- * Lazy initializer for useReducer: safely loads and validates tasks from localStorage.
- */
+
 export function initTasks() {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -104,7 +100,7 @@ export function taskReducer(state, action) {
           title: trimmedTitle,
           time: nextTime,
           date: nextDate,
-          // Reset notified flag whenever date or time changes
+         
           notified: scheduleChanged ? false : task.notified,
         };
       });

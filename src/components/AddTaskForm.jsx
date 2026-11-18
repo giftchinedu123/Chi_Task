@@ -25,7 +25,7 @@ export function AddTaskForm() {
       return;
     }
 
-    // Request notification permission only after a user gesture when saving a timed task
+   
     if (time && reminderPermission === 'default') {
       requestReminderPermission();
     }

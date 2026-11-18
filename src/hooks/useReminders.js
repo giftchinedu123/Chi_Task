@@ -15,16 +15,13 @@ function getInitialPermission() {
   }
 }
 
-/**
- * Schedules gentle one-time browser notifications for tasks due today.
- * Note: Browser Notification API timers only run while this page/tab remains open.
- */
+
 export function useReminders(tasks, todayKey, markNotified) {
   const [permission, setPermission] = useState(getInitialPermission);
 
   const notificationsSupported = permission !== 'unsupported';
 
-  // Sync permission state if the user changes browser settings while the tab is open
+  
   useEffect(() => {
     if (!notificationsSupported) return undefined;
 
@@ -42,7 +39,7 @@ export function useReminders(tasks, todayKey, markNotified) {
     };
   }, [notificationsSupported]);
 
-  // Must only be called in response to a direct user gesture (e.g., saving a timed task or clicking "Enable reminders")
+  
   const requestPermission = useCallback(async () => {
     if (typeof window === 'undefined' || !('Notification' in window)) {
       setPermission('unsupported');
@@ -64,7 +61,7 @@ export function useReminders(tasks, todayKey, markNotified) {
     }
   }, [permission]);
 
-  // Check every 25 seconds for due tasks scheduled today within a 5-minute window
+
   useEffect(() => {
     if (!notificationsSupported || permission !== 'granted') {
       return undefined;
@@ -94,7 +91,7 @@ export function useReminders(tasks, todayKey, markNotified) {
               silent: false,
             });
           } catch {
-            // Fail gracefully if the browser blocks Notification construction
+          
           }
           markNotified(task.id);
         }

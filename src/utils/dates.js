@@ -15,10 +15,7 @@ const SHORT_MONTHS = [
 
 const SHORT_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-/**
- * Formats a Date object as a local YYYY-MM-DD string.
- * Avoids Date.prototype.toISOString(), which converts to UTC and can shift dates by one day.
- */
+
 export function formatLocalDateKey(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -26,17 +23,13 @@ export function formatLocalDateKey(date) {
   return `${year}-${month}-${day}`;
 }
 
-/**
- * Parses a local YYYY-MM-DD key into a local Date at midnight.
- */
+
 export function parseLocalDateKey(dateKey) {
   const [year, month, day] = dateKey.split('-').map(Number);
   return new Date(year, month - 1, day, 0, 0, 0, 0);
 }
 
-/**
- * Formats a YYYY-MM-DD key (or Date) into a full readable date like "November 18, 2026".
- */
+
 export function formatFullDate(dateOrKey) {
   const date =
     typeof dateOrKey === 'string' ? parseLocalDateKey(dateOrKey) : dateOrKey;
@@ -47,18 +40,15 @@ export function formatFullDate(dateOrKey) {
   }).format(date);
 }
 
-/**
- * Returns the 7 days (Monday through Sunday) for the week containing referenceDate,
- * computed strictly in the user's local timezone.
- */
+
 export function getCurrentWeekDays(referenceDate = new Date()) {
   const todayKey = formatLocalDateKey(referenceDate);
   const year = referenceDate.getFullYear();
   const month = referenceDate.getMonth();
   const dayOfMonth = referenceDate.getDate();
-  const dayOfWeek = referenceDate.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+  const dayOfWeek = referenceDate.getDay();
 
-  // Shift back to Monday of the current week
+ 
   const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
 
   return Array.from({ length: 7 }, (_, index) => {
@@ -78,9 +68,7 @@ export function getCurrentWeekDays(referenceDate = new Date()) {
   });
 }
 
-/**
- * Converts a 24-hour "HH:MM" string into 12-hour display format like "9:00 AM".
- */
+
 export function formatTime12h(time24) {
   if (!time24 || !time24.includes(':')) return '';
   const [rawHours, rawMinutes] = time24.split(':').map(Number);
@@ -92,9 +80,7 @@ export function formatTime12h(time24) {
   return `${hours12}:${minutes} ${period}`;
 }
 
-/**
- * Returns milliseconds remaining until the next local midnight (+50ms buffer).
- */
+
 export function getMsUntilNextMidnight(now = new Date()) {
   const nextMidnight = new Date(
     now.getFullYear(),
@@ -108,9 +94,7 @@ export function getMsUntilNextMidnight(now = new Date()) {
   return Math.max(1000, nextMidnight.getTime() - now.getTime());
 }
 
-/**
- * Combines a local YYYY-MM-DD key and HH:MM string into a local epoch timestamp in ms.
- */
+
 export function getScheduledTimestamp(dateKey, time24) {
   if (!dateKey || !time24 || !time24.includes(':')) return null;
   const [year, month, day] = dateKey.split('-').map(Number);

@@ -64,7 +64,7 @@ button:disabled {
   outline-offset: 2px;
 }
 
-/* Mobile-first shell: full screen on mobile, centered 500px card on tablet & desktop */
+
 .page-shell {
   min-height: 100dvh;
   display: flex;
@@ -176,7 +176,7 @@ button:disabled {
   line-height: 1.4;
 }
 
-/* Generic icon button with >=44px touch target */
+
 .icon-btn {
   min-width: 44px;
   min-height: 44px;
@@ -198,7 +198,7 @@ button:disabled {
   transform: scale(0.95);
 }
 
-/* Menu dropdown */
+
 .menu-wrapper {
   position: relative;
   flex-shrink: 0;
@@ -296,7 +296,7 @@ button:disabled {
   opacity: 0.88;
 }
 
-/* Day tabs (Monday to Sunday) */
+
 .day-tabs-nav {
   margin-bottom: 20px;
 }
@@ -404,7 +404,7 @@ button:disabled {
   }
 }
 
-/* Task list */
+
 .task-list-section {
   flex: 1 1 auto;
   overflow-y: auto;
@@ -421,7 +421,7 @@ button:disabled {
   gap: 10px;
 }
 
-/* Task card */
+
 .task-card {
   display: flex;
   align-items: center;
@@ -499,7 +499,7 @@ button:disabled {
   color: var(--text-primary);
 }
 
-/* Circle check SVG transition */
+
 .circle-check-ring {
   fill: transparent;
   stroke: #c7c7cc;
@@ -531,7 +531,7 @@ button:disabled {
   opacity: 1;
 }
 
-/* Inline edit mode */
+
 .task-card.is-editing {
   padding: 14px 16px;
   border-color: #c7c7cc;
@@ -618,7 +618,6 @@ button:disabled {
   opacity: 0.88;
 }
 
-/* Empty state */
 .empty-state {
   padding: 48px 20px;
   text-align: center;
@@ -648,7 +647,7 @@ button:disabled {
   color: var(--text-secondary);
 }
 
-/* Add task form */
+
 .add-task-footer {
   margin-top: auto;
   padding-top: 12px;
@@ -760,7 +759,7 @@ button:disabled {
   padding-left: 14px;
 }
 
-/* Animations */
+
 @keyframes taskEnter {
   from {
     opacity: 0;

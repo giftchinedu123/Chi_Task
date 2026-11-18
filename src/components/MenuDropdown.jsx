@@ -20,7 +20,7 @@ export function MenuDropdown() {
     setConfirmClearAll(false);
   };
 
-  // Close dropdown on outside click or Escape key
+
   useEffect(() => {
     if (!isOpen) return undefined;
 
